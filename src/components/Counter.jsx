@@ -1,47 +1,21 @@
 import React, {useState} from 'react';
 
 const Counter = () => {
-  const [count, setCount] = useState(0);
-  const [display, setDisplay] = useState(false);
-
-  const handleClick = e => {
-    if (e.target.id === 'up') {
-      setDisplay(true)
-      setCount(count + 1)
-    }
-
-    if (e.target.id === 'down') {
-      if (count > 0) {
-        setCount(count - 1)
-      }
-      if (count <= 1) {
-        setDisplay(false)
-      }
-    }
-  }
+  const [value, setValue] = useState(0);
+  const [showValue, setShowValue] = useState(false);
 
   return (
     <div style={{
       display: 'flex',
       flexDirection: 'column'
     }}>
-      {display ? <h1>{count}</h1> : null}
-
-      <button
-        id="up"
-        onClick={handleClick}
-        data-testid='up'
-      >
-        Up
-      </button>
-
-      <button
-        id="down"
-        onClick={handleClick}
-        data-testid='down'
-      >
-        Down
-      </button>
+      <p>The current value is <span data-testid="counter-value">{value}</span></p>
+      <p>
+        <button onClick={() => setValue(value + 1)}>+</button>
+        <button onClick={() => setValue(value - 1)}>-</button>
+        <button onClick={() => setTimeout(() => setShowValue(true), 500)}>Show it</button>
+      </p>
+      {showValue && <p></p>}
     </div>
   );
 };
