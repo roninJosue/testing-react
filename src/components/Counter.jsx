@@ -15,7 +15,7 @@ const Counter = () => {
         <button onClick={() => setValue(value - 1)}>-</button>
         <button onClick={() => setTimeout(() => setShowValue(true), 500)}>Show it</button>
       </p>
-      {showValue && <p></p>}
+      {showValue && <p data-testid='value-box'>The current value is {value}</p>}
     </div>
   );
 };
