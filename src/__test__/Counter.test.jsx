@@ -1,27 +1,26 @@
-import React from "react"
-import {render, screen, fireEvent} from "@testing-library/react";
+import {render, screen, fireEvent, waitFor} from "@testing-library/react";
 import Counter from "../components/Counter";
 
-describe('Counter component',() => {
-  it('should increments count by one when up is clicked',  () => {
-    render(<Counter />)
+test('clicking the + button should increment the counter', () => {
+  render(<Counter></Counter>)
+  fireEvent.click(screen.getByText('+'))
 
-    fireEvent.click(screen.getByTestId('up'))
+  expect(screen.getByTestId('counter-value').outerHTML).toMatch(/1/i)
+})
 
-    let num = screen.getByText('1')
+test('clicking the - button should decrement the counter', () => {
+  render(<Counter></Counter>)
+  fireEvent.click(screen.getByText('-'))
 
-    expect(num).toBeInTheDocument()
-  });
+  expect(screen.getByTestId('counter-value').outerHTML).toMatch(/-1/i)
+})
 
-  it('should decrements count by one when down is clicked', () => {
-    render(<Counter />)
+test('clicking the "Show it" button should show the value',  async () => {
+  render(<Counter></Counter>)
+  fireEvent.click(screen.getByText('Show it'))
 
-    fireEvent.click(screen.getByTestId('up'))
+  await waitFor(() => {
+    expect(screen.getByTestId('value-box').outerHTML).toMatch(/The current value is 0/i)
+  })
 
-    let num = screen.getByText('1')
-
-    fireEvent.click(screen.getByTestId('down'))
-
-    expect(num).not.toBeInTheDocument()
-  });
 })
