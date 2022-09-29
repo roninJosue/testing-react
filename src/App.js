@@ -2,6 +2,7 @@ import './App.css';
 import Counter from "./components/Counter";
 import Printer from "./components/Printer";
 import Greeter from "./components/Greeter";
+import APICall from "./components/APICall";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Counter />
         <Printer />
         <Greeter name='Reynaldo' />
+        <APICall />
       </header>
     </div>
   );
